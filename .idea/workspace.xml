@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6fd66bd-b5e5-4e37-b221-7ac0b0627fec" name="Changes" comment="Permière sauvegarde">
+    <list default="true" id="e6fd66bd-b5e5-4e37-b221-7ac0b0627fec" name="Changes" comment="TODO 15">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CalculatriceSwing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CalculatriceSwing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sorties.html" beforeDir="false" afterPath="$PROJECT_DIR$/sorties.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entrees.txt" beforeDir="false" afterPath="$PROJECT_DIR$/entrees.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sorties.html" beforeDir="false" afterPath="$PROJECT_DIR$/sorties.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +54,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1684790761055</updated>
-      <workItem from="1684790762145" duration="2363000" />
+      <workItem from="1684790762145" duration="2908000" />
     </task>
     <task id="LOCAL-00001" summary="Permière sauvegarde">
       <created>1684790934267</created>
@@ -65,7 +63,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684790934267</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="TODO 15">
+      <created>1684793168924</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1684793168924</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -74,6 +79,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Permière sauvegarde" />
-    <option name="LAST_COMMIT_MESSAGE" value="Permière sauvegarde" />
+    <MESSAGE value="TODO 15" />
+    <option name="LAST_COMMIT_MESSAGE" value="TODO 15" />
   </component>
 </project>

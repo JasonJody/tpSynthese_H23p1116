@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.PrintWriter;
 public class Main {
 	// TODO 15 : public static List<Personne> lireFichier(String fichier)
     // TODO 16: public static void ecrireFichier(List<Personne> personnes, String fichier)
@@ -44,7 +45,7 @@ public class Main {
             System.out.println();
         }
         // TODO 16
-        //ecrireFichier(personnes, "sorties.html"); // exemple fourni
+        ecrireFichier(personnes, "sorties.html"); // exemple fourni
 
 
     }
@@ -73,5 +74,29 @@ public class Main {
         }
 
         return personnes;
+    }
+
+    public static void ecrireFichier(List<Personne> personnes, String cheminFichier) {
+        try {
+            PrintWriter writer = new PrintWriter(cheminFichier);
+
+            writer.println("<html>");
+            writer.println("<body>");
+
+            for (Personne personne : personnes) {
+                writer.println("<p>");
+                writer.println("Nom: <strong>" + personne.getNom() + "</strong><br>");
+                writer.println("Age: " + personne.getAge() + "<br>");
+                writer.println("Email: <a href=\"" + personne.getCourriel() + "\">" + personne.getCourriel() + "</a><br>");
+                writer.println("</p>");
+            }
+
+            writer.println("</body>");
+            writer.println("</html>");
+
+            writer.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Erreur lors de l'écriture dans le fichier : " + e.getMessage());
+        }
     }
 }
