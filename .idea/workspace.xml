@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6fd66bd-b5e5-4e37-b221-7ac0b0627fec" name="Changes" comment="TODO 16">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="e6fd66bd-b5e5-4e37-b221-7ac0b0627fec" name="Changes" comment="Interface complétée">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CalculatriceSwing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CalculatriceSwing.java" afterDir="false" />
     </list>
@@ -65,7 +64,7 @@
       <updated>1684790761055</updated>
       <workItem from="1684790762145" duration="9669000" />
       <workItem from="1684852731918" duration="5000" />
-      <workItem from="1684864915319" duration="11601000" />
+      <workItem from="1684864915319" duration="17966000" />
     </task>
     <task id="LOCAL-00001" summary="Permière sauvegarde">
       <created>1684790934267</created>
@@ -88,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684793715020</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Interface complétée">
+      <created>1684878946362</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1684878946362</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -99,6 +105,7 @@
     <MESSAGE value="Permière sauvegarde" />
     <MESSAGE value="TODO 15" />
     <MESSAGE value="TODO 16" />
-    <option name="LAST_COMMIT_MESSAGE" value="TODO 16" />
+    <MESSAGE value="Interface complétée" />
+    <option name="LAST_COMMIT_MESSAGE" value="Interface complétée" />
   </component>
 </project>

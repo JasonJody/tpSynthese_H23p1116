@@ -49,6 +49,9 @@ public class CalculatriceSwing extends JPanel {
         setPreferredSize (new Dimension (310, 238));
         setLayout (null);
 
+        //Désactiver bouton calculer
+        boutonCalculer.setEnabled (false);
+
         //add components
         add (menuOptions);
         add (calculArea);
@@ -73,8 +76,8 @@ public class CalculatriceSwing extends JPanel {
 
         //set component bounds (only needed by Absolute Positioning)
         menuOptions.setBounds (0, 0, 310, 25);
-        calculArea.setBounds (0, 25, 311, 31);
-        boutonNettoyage.setBounds (0, 215, 315, 25);
+        calculArea.setBounds (0, 25, 310, 31);
+        boutonNettoyage.setBounds (0, 215, 310, 25);
         boutonCalculer.setBounds (0, 55, 110, 160);
         btn1.setBounds (110, 55, 50, 40);
         btn5.setBounds (110, 95, 50, 40);
@@ -92,6 +95,73 @@ public class CalculatriceSwing extends JPanel {
         btn8.setBounds (260, 95, 50, 40);
         btnAddition.setBounds (260, 135, 50, 40);
         btnClear.setBounds (260, 175, 50, 40);
+
+        for (int i = 0; i < listeBoutonsAction.length; i++) {
+            JButton leBouton = listeBoutonsAction[i];
+            String valeurBouton = leBouton.getText();
+            leBouton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //Pour désactiver le bouton calculer quand la formule n'est pas bonne
+                    boutonCalculer.setEnabled (!leBouton.getText().equals("+") && !leBouton.getText().equals("*"));
+
+                    //Pour qu'on ne puisse pas mettre de + ou * 2 fois de suite ou en avant de la formule
+                    String texteCalcul = calculArea.getText();
+                    String texteBouton = leBouton.getText();
+
+                    if (texteCalcul.length() > 0) {
+                        char dernierCaractere = texteCalcul.charAt(texteCalcul.length() - 1);
+                        if ((dernierCaractere == '+' || dernierCaractere == '*')
+                            && (texteBouton.equals("+") || texteBouton.equals("*"))    ) {
+                            return;
+                        }
+                    }
+                    if (texteCalcul.length() == 0 && (texteBouton.equals("+") || texteBouton.equals("*"))) {
+                        return;
+                    }
+                    addTextAreaText(calculArea, valeurBouton);
+                }
+            });
+        }
+        btnClear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boutonCalculer.setEnabled (false);
+                setTextAreaText(calculArea, "");
+            }
+        });
+        boutonNettoyage.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cleanCalcule(calculArea);
+                boutonCalculer.setEnabled(true);
+                afficherEtatCalcu(calculArea, e);
+            }
+        });
+        boutonCalculer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String calcule = calculArea.getText();
+                String reponseString = "" + faireCalcul(calcule);
+
+                setTextAreaText(calculArea, reponseString);
+                boutonCalculer.setEnabled(false);
+            }
+        });
+
+        nettoie_et_calculItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cleanCalcule(calculArea);
+                afficherEtatCalcu(calculArea, e);
+
+                String calcule = calculArea.getText();
+                String reponseString = "" + faireCalcul(calcule);
+
+                setTextAreaText(calculArea, reponseString);
+                boutonCalculer.setEnabled(false);
+            }
+        });
     }
 
 
@@ -103,10 +173,137 @@ public class CalculatriceSwing extends JPanel {
         frame.setVisible (true);
     }
 
+    /**
+     * Cette méthode permet de définir le texte d'un JTextField.
+     *
+     * @param textArea le JTextField à modifier
+     * @param text     le texte à définir
+     */
     public static void setTextAreaText(JTextField textArea, String text) {
         textArea.setText(text);
     }
+
+    /**
+     * Cette méthode permet d'ajouter du texte à un JTextField.
+     *
+     * @param textArea le JTextField à modifier
+     * @param text     le texte à ajouter
+     */
     public static void addTextAreaText(JTextField textArea, String text) {
         textArea.setText(textArea.getText() + text);
+    }
+
+    /**
+     * Cette méthode effectue un calcul arithmétique à partir d'une chaîne de caractères.
+     * Elle prend en compte les opérations d'addition (+) et de multiplication (*).
+     *
+     * @param leCalcul la chaîne de caractères représentant le calcul
+     * @return le résultat du calcul
+     */
+    public static int faireCalcul(String leCalcul) {
+        int resultat = 0;
+        String[] listeChiffre = leCalcul.split("[+*]");
+        String[] listeOperateur = leCalcul.split("[0-9]");
+        listeOperateur = retirerCaseVide(listeOperateur);
+
+        resultat = Integer.parseInt(listeChiffre[0]);
+
+        for (int i = 1; i < listeChiffre.length; i++) {
+            String operateur = listeOperateur[i - 1];
+            int chiffre = Integer.parseInt(listeChiffre[i]);
+
+            if (operateur.equals("+")) {
+                resultat += chiffre;
+            } else if (operateur.equals("*")) {
+                resultat *= chiffre;
+            }
+        }
+
+        return resultat;
+    }
+
+    /**
+     * Cette méthode retire les cases vides d'un tableau de chaînes de caractères.
+     *
+     * @param array le tableau de chaînes de caractères à traiter
+     * @return un nouveau tableau sans les cases vides
+     */
+    public static String[] retirerCaseVide(String[] array) {
+        String[] newArray;
+        int nbPasVide = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (!(array[i].isEmpty())) {
+                nbPasVide++;
+            }
+        }
+        newArray = new String[nbPasVide];
+        int w = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (!(array[i].isEmpty())) {
+                newArray[w] = array[i];
+                w++;
+            }
+        }
+        return newArray;
+    }
+
+    /**
+     * Cette méthode nettoie la chaîne de calcul en enlevant le dernier caractère s'il s'agit d'un opérateur (+ ou *).
+     *
+     * @param calculArea le JTextField contenant la chaîne de calcul
+     */
+    public static void cleanCalcule(JTextField calculArea) {
+        char dernierCaractere;
+        if (!(calculArea.getText().isEmpty())) {
+            dernierCaractere = calculArea.getText().charAt(calculArea.getText().length() - 1);
+            if (dernierCaractere == '+' || dernierCaractere == '*') {
+                setTextAreaText(calculArea, calculArea.getText().substring(0, calculArea.getText().length() - 1));
+            }
+        }
+    }
+
+    /**
+     * Cette méthode affiche l'état de la calculatrice dans une boîte de dialogue.
+     * Elle affiche les opérateurs et les arguments séparément.
+     *
+     * @param calculArea le JTextField contenant la chaîne de calcul
+     * @param e          l'événement qui a déclenché l'affichage de l'état
+     */
+    public static void afficherEtatCalcu(JTextField calculArea, ActionEvent e) {
+        String ligne1 = "Opérateurs: ";
+        String ligne2 = "Arguments: ";
+
+        String arguments = "";
+        String operateurs = "";
+
+        String[] contenueCalcul = calculArea.getText().split("");
+        for (String caractere : contenueCalcul) {
+            try {
+                int chiffre = Integer.parseInt(caractere);
+                arguments += chiffre;
+            } catch (NumberFormatException ignored) {
+                operateurs += caractere + " ";
+                arguments += " ";
+            }
+        }
+
+        ligne1 += operateurs;
+        ligne2 += arguments;
+
+        String[] options = {"OK"};
+        int optionType = JOptionPane.DEFAULT_OPTION;
+        int messageType = JOptionPane.INFORMATION_MESSAGE;
+
+        JFrame parentFrame = (JFrame) SwingUtilities.getRoot((Component) e.getSource());
+        JOptionPane.showOptionDialog(
+                parentFrame, // Composant parent
+                new Object[]{ligne1, ligne2}, // Contenu du dialogue
+                "État de la calculatrice", // Titre du dialogue
+                optionType, // Type de boutons
+                messageType, // Type de message
+                null, // Icône personnalisée
+                options, // Options de boutons
+                options[0] // Option par défaut
+        );
     }
 }
